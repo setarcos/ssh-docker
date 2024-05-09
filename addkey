@@ -1,5 +1,6 @@
 #!/bin/sh
 
+umask 077
 mkdir -p ~/.ssh
 touch ~/.ssh/authorized_keys
 echo $1 >> ~/.ssh/authorized_keys

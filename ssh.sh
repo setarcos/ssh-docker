@@ -21,6 +21,8 @@ case $1 in
         ;;
     "adduser")
         docker exec -it ssh /usr/sbin/adduser -D $2 -G nobody
+        docker exec -it ssh /bin/chmod 700 /home/$2
+        docker exec -it ssh /bin/chmod -s /home/$2
         docker exec -it ssh /bin/su $2 -c "/usr/sbin/addkey \"$3\""
         docker exec -it ssh /bin/sed -i "s/$2:!/$2:*/g" /etc/shadow
         ;;
