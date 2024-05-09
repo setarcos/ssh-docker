@@ -5,13 +5,12 @@ case $1 in
         docker build -t ssh .
         ;;
     "init")
-        docker run -d --name ssh --rm ssh
-        docker cp ssh:/etc .
-        mkdir home
+        docker run -d --name ssh --rm --volume="$PWD:/mnt" ssh
+        docker exec -it ssh /bin/cp -a /etc /mnt
+        docker exec -it ssh /bin/cp -a /home /mnt
         docker kill ssh
         ;;
     "run")
-        PWD=$(pwd)
         docker run -d -p 2222:22 --name ssh --rm --hostname myssh \
             --volume="$PWD/etc:/etc" \
             --volume="$PWD/home:/home" \
