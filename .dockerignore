@@ -1,2 +1,6 @@
+.dockerignore
+LICENSE
+Dockerfile
 etc
 home
+*.md
